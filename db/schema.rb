@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_10_023617) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_10_053028) do
   create_table "notebooks", force: :cascade do |t|
     t.string "name"
     t.integer "user_id", null: false
@@ -43,6 +43,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_10_023617) do
     t.string "user_agent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token"
+    t.index ["token"], name: "index_sessions_on_token", unique: true
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 

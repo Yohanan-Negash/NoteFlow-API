@@ -4,8 +4,17 @@ class Api::V1::AuthController < ApplicationController
   def login
     user = User.find_by(email_address: params[:email_address])
     if user&.authenticate(params[:password])
-      session = Session.create!(user: user, ip_address: request.remote_ip, user_agent: request.user_agent)
-      render json: { token: token }, status: :ok
+      session = Session.create!(
+        user: user,
+        ip_address: request.remote_ip,
+        user_agent: request.user_agent
+      )
+      render json: { 
+        data: { 
+          token: session.token,
+          user: user.as_json(except: :password_digest)
+        }
+      }, status: :ok
     else
       render json: { error: 'Invalid email address or password' }, status: :unauthorized
     end
@@ -18,8 +27,17 @@ class Api::V1::AuthController < ApplicationController
       password_confirmation: params[:password_confirmation]
     )
     if user.save
-      session = Session.create!(user: user, ip_address: request.remote_ip, user_agent: request.user_agent)
-      render json: { token: session.token, user: user.as_json(except: :password_digest) }, status: :created
+      session = Session.create!(
+        user: user,
+        ip_address: request.remote_ip,
+        user_agent: request.user_agent
+      )
+      render json: { 
+        data: { 
+          token: session.token,
+          user: user.as_json(except: :password_digest)
+        }
+      }, status: :created
     else
       render json: { error: user.errors.full_messages }, status: :unprocessable_entity
     end
