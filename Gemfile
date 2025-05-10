@@ -4,6 +4,9 @@ source "https://rubygems.org"
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 
+# Rack CORS for handling CORS
+gem 'rack-cors'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.2"
 # Use sqlite3 as the database for Active Record
