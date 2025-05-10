@@ -3,15 +3,18 @@ class Api::V1::NotesController < ApplicationController
   before_action :set_notebook
   before_action :set_note, only: [:show, :update, :destroy]
 
+  # GET /api/v1/notebooks/:notebook_id/notes
   def index
     notes = @notebook.notes
     render json: notes, status: :ok
   end
 
+  # GET /api/v1/notebooks/:notebook_id/notes/:id
   def show
     render json: @note, status: :ok
   end
 
+  # POST /api/v1/notebooks/:notebook_id/notes
   def create
     note = @notebook.notes.new(note_params)
     if note.save
@@ -21,6 +24,7 @@ class Api::V1::NotesController < ApplicationController
     end
   end
 
+  # PUT /api/v1/notebooks/:notebook_id/notes/:id
   def update
     if @note.update(note_params)
       render json: @note, status: :ok
@@ -29,6 +33,7 @@ class Api::V1::NotesController < ApplicationController
     end
   end
 
+  # DELETE /api/v1/notebooks/:notebook_id/notes/:id
   def destroy
     @note.destroy
     head :no_content

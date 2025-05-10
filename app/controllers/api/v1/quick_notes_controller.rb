@@ -2,15 +2,18 @@ class Api::V1::QuickNotesController < ApplicationController
   before_action :authenticate_request
   before_action :set_quick_note, only: [:show, :update, :destroy]
 
+  # GET /api/v1/quick_notes
   def index
     quick_notes = Current.user.quick_notes
     render json: quick_notes, status: :ok
   end
 
+  # GET /api/v1/quick_notes/:id
   def show
     render json: @quick_note, status: :ok
   end
 
+  # POST /api/v1/quick_notes
   def create
     quick_note = Current.user.quick_notes.new(quick_note_params)
     if quick_note.save
@@ -20,6 +23,7 @@ class Api::V1::QuickNotesController < ApplicationController
     end
   end
 
+  # PUT /api/v1/quick_notes/:id
   def update
     if @quick_note.update(quick_note_params)
       render json: @quick_note, status: :ok
@@ -28,6 +32,7 @@ class Api::V1::QuickNotesController < ApplicationController
     end
   end
 
+  # DELETE /api/v1/quick_notes/:id
   def destroy
     @quick_note.destroy
     head :no_content

@@ -2,15 +2,18 @@ class Api::V1::NotebooksController < ApplicationController
   before_action :authenticate_request
   before_action :set_notebook, only: [:show, :update, :destroy]
 
+  # GET /api/v1/notebooks
   def index
     notebooks = Current.user.notebooks
     render json: notebooks, status: :ok
   end
 
+  # GET /api/v1/notebooks/:id
   def show
     render json: @notebook, status: :ok
   end
 
+  # POST /api/v1/notebooks
   def create
     notebook = Current.user.notebooks.new(notebook_params)
     if notebook.save
@@ -20,6 +23,7 @@ class Api::V1::NotebooksController < ApplicationController
     end
   end
 
+  # PUT /api/v1/notebooks/:id
   def update
     if @notebook.update(notebook_params)
       render json: @notebook, status: :ok
@@ -28,6 +32,7 @@ class Api::V1::NotebooksController < ApplicationController
     end
   end
 
+  # DELETE /api/v1/notebooks/:id
   def destroy
     @notebook.destroy
     head :no_content
