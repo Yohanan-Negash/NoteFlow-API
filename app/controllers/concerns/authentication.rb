@@ -3,7 +3,6 @@ module Authentication
 
   included do
     before_action :authenticate_request
-    attr_reader :current_user
   end
 
   class_methods do
@@ -22,7 +21,6 @@ module Authentication
     
     if session
       Current.session = session
-      Current.user = session.user
     else
       render json: { error: 'Unauthorized' }, status: :unauthorized
     end
