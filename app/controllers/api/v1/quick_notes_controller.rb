@@ -47,7 +47,7 @@ class Api::V1::QuickNotesController < ApplicationController
   end
 
   def quick_note_params
-    params.require(:quick_note).permit(:title, :content)
+    params.require(:quick_note).permit(:content)
   end
 
 end
