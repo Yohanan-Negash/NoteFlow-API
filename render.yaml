@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: noteflow-api
+    runtime: ruby
+    buildCommand: './bin/render-build.sh'
+    startCommand: 'bin/rails server'
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: noteflow-db
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: WEB_CONCURRENCY
+        value: 2
+
+databases:
+  - name: noteflow-db
+    databaseName: noteflow_production
+    user: noteflow
