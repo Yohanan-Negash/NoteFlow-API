@@ -41,7 +41,7 @@ class Api::V1::NotesController < ApplicationController
 
   private
   def set_notebook
-    @notebook = Current.user.notebooks.find(param[:notebook_id])
+    @notebook = Current.user.notebooks.find(params[:notebook_id])
   rescue ActiveRecord::RecordNotFound
     render json: { error: 'Notebook not found' }, status: :not_found
   end
