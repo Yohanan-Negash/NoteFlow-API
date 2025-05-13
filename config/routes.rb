@@ -11,14 +11,14 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
-      post 'login', to: 'auth#login'
-      post 'register', to: 'auth#register'
-      delete 'logout', to: 'auth#logout'
+      post "login", to: "auth#login"
+      post "register", to: "auth#register"
+      delete "logout", to: "auth#logout"
 
 
-      resources :quick_notes, only: [:index, :create, :show, :update, :destroy]
-      resources :notebooks, only: [:index, :create, :show, :update, :destroy] do 
-        resources :notes, only: [:index, :create, :show, :update, :destroy]
+      resources :quick_notes, only: [ :index, :create, :show, :update, :destroy ]
+      resources :notebooks, only: [ :index, :create, :show, :update, :destroy ] do
+        resources :notes, only: [ :index, :create, :show, :update, :destroy ]
       end
     end
   end

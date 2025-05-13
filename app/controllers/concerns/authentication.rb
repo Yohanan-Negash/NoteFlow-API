@@ -14,15 +14,15 @@ module Authentication
   private
 
   def authenticate_request
-    header = request.headers['Authorization']
-    header = header.split(' ').last if header
-    
+    header = request.headers["Authorization"]
+    header = header.split(" ").last if header
+
     session = Session.find_by(token: header)
-    
+
     if session
       Current.session = session
     else
-      render json: { error: 'Unauthorized' }, status: :unauthorized
+      render json: { error: "Unauthorized" }, status: :unauthorized
     end
   end
 

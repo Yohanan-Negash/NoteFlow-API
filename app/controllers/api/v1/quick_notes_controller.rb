@@ -1,6 +1,6 @@
 class Api::V1::QuickNotesController < ApplicationController
   before_action :authenticate_request
-  before_action :set_quick_note, only: [:show, :update, :destroy]
+  before_action :set_quick_note, only: [ :show, :update, :destroy ]
 
   # GET /api/v1/quick_notes
   def index
@@ -43,11 +43,10 @@ class Api::V1::QuickNotesController < ApplicationController
   def set_quick_note
     @quick_note = Current.user.quick_notes.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Quick note not found' }, status: :not_found
+    render json: { error: "Quick note not found" }, status: :not_found
   end
 
   def quick_note_params
     params.require(:quick_note).permit(:content)
   end
-
 end

@@ -1,11 +1,11 @@
 source "https://rubygems.org"
 
 # Sidekiq for background jobs scheduling
-gem 'sidekiq'
-gem 'sidekiq-scheduler'
+gem "sidekiq"
+gem "sidekiq-scheduler"
 
 # Rack CORS for handling CORS
-gem 'rack-cors'
+gem "rack-cors"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.2"

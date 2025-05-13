@@ -1,6 +1,6 @@
 class Api::V1::NotebooksController < ApplicationController
   before_action :authenticate_request
-  before_action :set_notebook, only: [:show, :update, :destroy]
+  before_action :set_notebook, only: [ :show, :update, :destroy ]
 
   # GET /api/v1/notebooks
   def index
@@ -18,8 +18,8 @@ class Api::V1::NotebooksController < ApplicationController
     notebook = Current.user.notebooks.new(notebook_params)
     if notebook.save
       render json: notebook, status: :created
-    else 
-      render json: {errors: notebook.errors.full_messages}, status: :unprocessable_entity
+    else
+      render json: { errors: notebook.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -28,7 +28,7 @@ class Api::V1::NotebooksController < ApplicationController
     if @notebook.update(notebook_params)
       render json: @notebook, status: :ok
     else
-      render json: {errors: @notebook.errors.full_messages}, status: :unprocessable_entity
+      render json: { errors: @notebook.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -42,7 +42,7 @@ class Api::V1::NotebooksController < ApplicationController
   def set_notebook
     @notebook = Current.user.notebooks.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: {errors: ['Notebook not found']}, status: :not_found
+    render json: { errors: [ "Notebook not found" ] }, status: :not_found
   end
 
   def notebook_params

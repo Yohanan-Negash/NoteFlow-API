@@ -1,5 +1,5 @@
 class Api::V1::AuthController < ApplicationController
-  skip_before_action :authenticate_request, only: [:login, :register]
+  skip_before_action :authenticate_request, only: [ :login, :register ]
 
   def login
     user = User.find_by(email_address: params[:email_address])
@@ -9,14 +9,14 @@ class Api::V1::AuthController < ApplicationController
         ip_address: request.remote_ip,
         user_agent: request.user_agent
       )
-      render json: { 
-        data: { 
+      render json: {
+        data: {
           token: session.token,
           user: user.as_json(except: :password_digest)
         }
       }, status: :ok
     else
-      render json: { error: 'Invalid email address or password' }, status: :unauthorized
+      render json: { error: "Invalid email address or password" }, status: :unauthorized
     end
   end
 
@@ -32,8 +32,8 @@ class Api::V1::AuthController < ApplicationController
         ip_address: request.remote_ip,
         user_agent: request.user_agent
       )
-      render json: { 
-        data: { 
+      render json: {
+        data: {
           token: session.token,
           user: user.as_json(except: :password_digest)
         }
@@ -45,6 +45,6 @@ class Api::V1::AuthController < ApplicationController
 
   def logout
     Current.session&.destroy
-    render json: { message: 'Logged out successfully' }, status: :ok
+    render json: { message: "Logged out successfully" }, status: :ok
   end
 end
