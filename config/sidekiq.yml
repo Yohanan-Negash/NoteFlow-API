@@ -1,8 +1,0 @@
-:concurrency: 10
-:queues:
-  - default
-
-:schedule:
-  delete_expired_quick_notes_job:
-    cron: '0 0 * * *'
-    class: 'DeleteExpiredQuickNotesJob'

@@ -1,9 +1,5 @@
 source "https://rubygems.org"
 
-# Sidekiq for background jobs scheduling
-gem "sidekiq"
-gem "sidekiq-scheduler"
-
 # Rack CORS for handling CORS
 gem "rack-cors"
 
