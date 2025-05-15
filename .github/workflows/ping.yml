@@ -5,6 +5,7 @@ name: Ping Health Check
 on:
   schedule:
     - cron: '*/12 * * * *' # every 12 minutes
+  workflow_dispatch: # Allow manual triggering from GitHub UI
 
 jobs:
   ping:
