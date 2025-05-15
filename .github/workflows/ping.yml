@@ -1,5 +1,7 @@
 name: Ping Health Check
 
+# This workflow pings the health check endpoint every 12 minutes to keep the service alive
+# and verify that it's functioning properly. It will fail if the endpoint returns a non-200 response.
 on:
   schedule:
     - cron: '*/12 * * * *' # every 12 minutes
