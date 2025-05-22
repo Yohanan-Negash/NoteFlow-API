@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
 
       resources :quick_notes, only: [ :index, :create, :show, :update, :destroy ]
+      post "quick_notes/purge_expired", to: "quick_notes#purge_expired"
       resources :notebooks, only: [ :index, :create, :show, :update, :destroy ] do
         resources :notes, only: [ :index, :create, :show, :update, :destroy ]
       end

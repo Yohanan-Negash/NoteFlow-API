@@ -38,6 +38,12 @@ class Api::V1::QuickNotesController < ApplicationController
     head :no_content
   end
 
+  # POST /api/v1/quick_notes/purge_expired
+  def purge_expired
+    DeleteExpiredQuickNotesJob.perform_later
+    head :accepted
+  end
+
   private
 
   def set_quick_note
